@@ -4,19 +4,97 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sistema Comissão</title>
+	<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
-	<form action="https://sheetdb.io/api/v1/iw8og77r7r6x3" 
-	method="POST" name="ComissãoDoMesSamuel">
-		
-		<input type="email" name="data[email]" placeholder="Digite...">
-		<input type="text" name="data[name]" placeholder="Digite...">
-		<input type="password" name="data[senha]" placeholder="Digite...">
+	<!-- 
+		No action, entre no site https://sheetdb.io para implementar sua planilha.
+		Já no name, adicione o nome da sua planilha criada no google planilha
+	-->
 
-		<input type="submit" value="Enviar">
+	<form action="https://sheetdb.io" 
+	method="POST" name="ComissãoDoMesSamuel">
+
+		<!-- Dia -->
+		<div class="campo">
+			<label for="dia">Dia de trabalho:</label>
+			<input type="date" name="data[dia]" id="dia" placeholder="Digite...">
+		</div>
+
+		<!-- Total de Fichas -->
+		<div class="campo">
+			<label for="tfichas">Total de Fichas:</label>
+			<input type="number" name="data[tfichas]" id="tfichas" placeholder="Digite...">
+		</div>
+
+
+		<!-- Fichas Recebidas -->
+		<div class="campo">
+			<label for="rfichas">Fichas Recebidas:</label>
+			<input type="number" name="data[rfichas]" id="rfichas" placeholder="Digite...">
+		</div>
+
+		<!-- Meta do Dia -->
+		<div class="campo">
+			<label for="meta">Meta do dia:</label>
+			<input type="number" name="data[meta]" id="meta" placeholder="Digite...">
+		</div>
+
+		<div class="infor">
+			<div class="mensagem">
+				<h1 id="titulo_mensagem"></h1>
+				<p id="mensagem_sobre_dia"></p>
+			<div class="resposta">
+				<p>
+					Bem, sua Gratificação foi de
+					<input type="text" name="data[gratificacao]" id="gratificacao">, então fizemos o calculo.
+					Você ganhou no dia de hoje 
+					<input type="text" name="data[valorganho]" id="valorganho" >, com a porcentagen de
+					<input type="text" name="data[porcentagem]" id="porcentagem" >
+					fichas recebidas e
+					<input type="text" name="data[bmeta]" id="bmeta" >
+					você bateu a meta!
+				</p>
+				<p>
+					⚠ Todas as informações foram calculadas, caso não esteja correto, cancele o envio e faça novamente, caso esteja certo, aperte em enviar que salvamos as informações em uma planilha excel.
+				</p>
+			</div>
+
+			<div class="buttons_mensagem">
+				<input type="button" class="cancelar_form" value="Cancelar envio">
+				<input type="submit" class="envio_form" value="Enviar">
+			</div>			
+		</div>
+	</div>
+
+		<input type="button" id="button" value="Enviar">
 
 	</form>
+
+
+
+<script>
 	
+	const buttonAbrir = document.querySelector('#button');
+	const cancelarForm = document.querySelector('.cancelar_form');
+	const infor = document.querySelector('.infor');
+
+	buttonAbrir.addEventListener('click', informacoesAdd);
+	cancelarForm.addEventListener('click', informacoesRemove);
+
+	function informacoesAdd()
+	{
+		console.log('Você abriu a mensagem')
+		infor.classList.add('abrir')
+	}
+	function informacoesRemove()
+	{
+		infor.classList.remove('abrir')
+	}
+
+</script>
+<script src="script.js"></script>
 </body>
 </html>

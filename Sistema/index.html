@@ -13,7 +13,7 @@
 		No action, entre no site https://sheetdb.io para implementar sua planilha.
 		Já no name, adicione o nome da sua planilha criada no google planilha
 	-->
-
+<section class="formulario">
 	<form action="https://sheetdb.io" 
 	method="POST" name="ComissãoDoMesSamuel">
 
@@ -72,7 +72,29 @@
 		<input type="button" id="button" value="Enviar">
 
 	</form>
-
+</section>
+<section class="section_dados">
+	<div class="scroll">
+		<div class="scroll_buttons">
+			<button class="scroll_vizualizar_button">Vizualizar Tabela</button>
+			<button class="scroll_excluir_button">Excluir Dados</button>		
+		</div>
+		<div class="scroll_table">
+			<table class="table">
+				<tr class="cabecalho_table">
+					<th class="cabecalho_table">Dia</th>
+					<th>Total de Fichas</th>
+					<th>Fichas Recebidas</th>
+					<th>Meta do Dia</th>
+					<th>Gratificação</th>
+					<th>Porcentagem (%)</th>
+					<th>Valor Ganho</th>
+					<th>Bateu a Meta?</th>
+				</tr>			
+			</table>
+		</div>
+	</div>
+</section>
 
 
 <script>
@@ -95,6 +117,7 @@
 	}
 
 </script>
-<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->
+<script src="app.js"></script>
 </body>
 </html>

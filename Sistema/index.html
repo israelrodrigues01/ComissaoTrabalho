@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sistema Comissão</title>
 	<link rel="stylesheet" href="style.css">
+	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
 <body>
@@ -90,15 +91,26 @@
 					<th>Porcentagem (%)</th>
 					<th>Valor Ganho</th>
 					<th>Bateu a Meta?</th>
-				</tr>			
+				</tr>	
 			</table>
 		</div>
 	</div>
 </section>
 
+<div class="windows">
+	<div class="windows-box">
+
+		<p></p>
+
+		<div class="windows-box-btn">
+			<button class="windows-box-btn-nao">Não</button>
+			<button class="windows-box-btn-sim">Sim</button>
+		</div>
+	</div>
+</div>
+
 
 <script>
-	
 	const buttonAbrir = document.querySelector('#button');
 	const cancelarForm = document.querySelector('.cancelar_form');
 	const infor = document.querySelector('.infor');
@@ -109,15 +121,13 @@
 	function informacoesAdd()
 	{
 		console.log('Você abriu a mensagem')
-		infor.classList.add('abrir')
+		infor.classList.add('show')
 	}
 	function informacoesRemove()
 	{
-		infor.classList.remove('abrir')
+		infor.classList.remove('show')
 	}
-
 </script>
-<!-- <script src="script.js"></script> -->
 <script src="app.js"></script>
 </body>
 </html>

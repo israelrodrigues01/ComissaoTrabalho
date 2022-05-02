@@ -3,6 +3,10 @@ scrollBtn = document.querySelector('.scroll_vizualizar_button'),
 excluirBtn = document.querySelector('.scroll_excluir_button'),
 tabela = document.querySelector('.scroll_table'),
 thTabela = document.querySelector('.cabecalho_table'),
+windows = document.querySelector('.windows'),
+windowsBtnS = windows.querySelector('.windows-box-btn-sim'),
+windowsBtnN = windows.querySelector('.windows-box-btn-nao'),
+windowsText = windows.querySelector('.windows-box p'),
 linhaTabela = document.getElementById('dados'),
 recebidasFichas = document.getElementById('rfichas'),
 metaDia = document.getElementById('meta'),
@@ -21,6 +25,7 @@ envioForm.addEventListener('click', calculoporcentagem);
 envioForm.addEventListener('click', calculovalorganho);
 envioForm.addEventListener('click', metadodia);
 envioForm.addEventListener('click', enviarTd);
+excluirBtn.addEventListener('click', deletarTudo);
 
 function calculovalorganho()
 {
@@ -88,11 +93,6 @@ function metadodia()
 	}
 }
 
-
-
-
-
-
 // Dados da tabela (LocalStorage)
 scrollBtn.addEventListener('click', showTabela);
 
@@ -105,7 +105,7 @@ function showTabela()
 function criarTd()
 {
 	document.querySelectorAll('#dados').forEach(box => box.remove());
-	boxTabela.forEach((box) => {
+	boxTabela.forEach((box, id) => {
 		let linha = 
 					'<tr id="dados">'+
 					'<td>'+box.dt+'</td>'+
@@ -116,6 +116,7 @@ function criarTd()
 					'<td>'+box.pt+'</td>'+
 					'<td> R$ '+box.vg+'</td>'+
 					'<td>'+box.mt+'</td>'+
+					'<td class="excluir-btn-icon" onclick="deletar('+id+')"><i class="bx bx-trash"></i></td>'
 					'</tr>';
 
 				thTabela.insertAdjacentHTML("afterend", linha);
@@ -126,13 +127,13 @@ criarTd();
 function enviarTd()
 {
 	var rfichas = recebidasFichas.value;
-	var tfichas = totalFichas.value;
-	var metaD = metaDia.value;
-	var grat = gratificacao.value;
-	var valorG = valorGanho.value;
-	var metaText = bMeta.value;
-	var data = dia.value;
-	var porc = porcentagem.value;
+	tfichas = totalFichas.value,
+	metaD = metaDia.value,
+	grat = gratificacao.value,
+	valorG = valorGanho.value,
+	metaText = bMeta.value,
+	data = dia.value,
+	porc = porcentagem.value;
 
 	let dados = 
 	{
@@ -151,3 +152,44 @@ function enviarTd()
 
 	criarTd();
 };
+
+// Function deletar dados
+function deletar(id)
+{
+	windows.classList.add('show');
+	windowsText.innerText = "Deseja excluir essa linha?";
+
+	windowsBtnN.onclick = () =>
+	{	
+		windows.classList.remove('show');
+	}
+	windowsBtnS.onclick = () =>
+	{	
+		boxTabela.splice(id, 1);
+		windows.classList.remove('show');
+		
+		
+		criarTd();
+		localStorage.setItem('Linha:', JSON.stringify(boxTabela));
+	}
+}
+
+// Function deletar todos os dados
+function deletarTudo(id)
+{	
+	windows.classList.add('show');
+
+	windowsText.innerText = "Deseja excluir todos os dados da tabela?";
+
+	windowsBtnN.onclick = () =>
+	{	
+		windows.classList.remove('show');
+	}
+	windowsBtnS.onclick = () =>
+	{	
+		document.location.reload(true);
+
+		criarTd();
+		localStorage.removeItem("Linha:", JSON.stringify(boxTabela));
+	}
+}
